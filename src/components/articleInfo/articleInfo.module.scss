@@ -1,0 +1,112 @@
+.cardWrapper {
+  background-color: white;
+  width: 938px;
+  height: fit-content;
+  padding: 15px 20px;
+  border: 1px solid transparent;
+}
+
+.cardPreview {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 682px;
+}
+
+.titleInfo {
+  display: flex;
+  gap: 12px;
+}
+
+.title {
+  color: #1890ff;
+  font-size: 20px;
+  line-height: 28px;
+  height: 30px;
+  max-width: 650px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  color: rgba(0,0,0,.75);
+  font-size: 12px;
+  line-height: 22px;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tag {
+  border: 1px solid rgba(0,0,0,.75);
+  border-radius: 2px;
+  color: rgba(0,0,0,.75);
+  font-size: 12px;
+  line-height: 15px;
+  padding: 2px;
+}
+
+.description {
+  max-width: 650px;
+  word-wrap: break-word;
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+  line-height: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.infoWrapper {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(0,0,0,.85);
+}
+
+.date {
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+}
+
+.avatar {
+  height: 46px;
+  width: 46px;
+}
+
+.cardText {
+  color: rgba(0,0,0,.75);
+  word-wrap: break-word;
+}

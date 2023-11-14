@@ -1,0 +1,101 @@
+.article {
+  background-color: white;
+  width: 938px;
+  height: fit-content;
+  padding: 15px 20px;
+  border: 1px solid transparent;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 682px;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.title {
+  height: 30px;
+  max-width: 650px;
+  color: #1890ff;
+  font-size: 20px;
+  line-height: 28px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+
+.tag {
+  border: 1px solid rgba(0,0,0,.75);
+  border-radius: 2px;
+  color: rgba(0,0,0,.75);
+  font-size: 12px;
+  line-height: 15px;
+  padding: 2px;
+}
+
+.text {
+  max-width: 650px;
+  height: 40px;
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+  line-height: 22px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.authUser {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 18px;
+  line-height: 28px;
+  color: rgba(0,0,0,.85);
+}
+
+.data {
+  color: rgba(0,0,0,.5);
+  font-size: 12px;
+}
+
+.avatar {
+  height: 46px;
+  width: 46px;
+}
