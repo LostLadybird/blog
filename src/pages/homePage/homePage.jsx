@@ -27,7 +27,7 @@ const HomePage = () => {
   }, [dispatch, page]);
 
   const onChangePagination = (page) => {
-    console.log('pagination', page);
+    // console.log('pagination', page);
     dispatch(changePage(page));
   };
 

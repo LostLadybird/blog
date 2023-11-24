@@ -9,7 +9,7 @@ export const fetchArticles = createAsyncThunk('articles/fetchArticles', async (o
     const response = await fetch(`${baseURL}/articles?limit=5&offset=${offset}`);
     if (!response.ok) throw new Error('Error');
     const data = await response.json();
-    console.log(data.articles);
+    // console.log(data.articles);
     return data.articles;
   } catch (error) {
     throw new Error(error);

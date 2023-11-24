@@ -1,5 +1,11 @@
+import React from 'react';
+
+import SignUpForm from '../../components/signUpForm/signUpForm';
+
 import './registrationPage.css';
 
-const registrationPage = () => {};
+const RegistrationPage = () => {
+  return <SignUpForm />;
+};
 
-export default registrationPage;
+export default RegistrationPage;

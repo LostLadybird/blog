@@ -1,5 +1,11 @@
+import React from 'react';
+
+import SignInForm from '../../components/signInForm/signInForm';
+
 import './loginPage.css';
 
-const loginPage = () => {};
+const LoginPage = () => {
+  return <SignInForm />;
+};
 
-export default loginPage;
+export default LoginPage;
