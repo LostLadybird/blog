@@ -1,1 +1,1 @@
-my blog kata
+https://myfirstblog-mu.vercel.app/
