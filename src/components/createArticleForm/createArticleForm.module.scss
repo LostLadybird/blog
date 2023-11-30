@@ -1,0 +1,139 @@
+.wrapper {
+  padding: 24px;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ebeef3;
+  min-height: calc(100vh - 80px);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 48px 32px;
+  border: 1px transparent solid;
+  background-color: #fff;
+  width: 940px;
+  height: fit-content;
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
+}
+
+.title {
+  margin: 0;
+  align-self: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.3px;
+  color: #262626;
+}
+
+.inputList {
+  list-style: none;
+  padding: 0;
+  margin: 21px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 21px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: #262626;
+}
+
+.input {
+  padding-left: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  height: 40px;
+  color: #262626;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  width: 100%;
+
+  &::placeholder {
+    color: #bfbfbf;
+  }
+}
+
+.textarea {
+  min-height: 168px;
+  width: 100%;
+}
+
+.tagList {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn {
+  display: block;
+  width: 320px;
+  box-sizing: border-box;
+  background: rgb(24, 144, 255);
+  border-radius: 4px;
+  padding: 8px 12px;
+  border: 1px solid rgb(24, 144, 255);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.error {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  color: #f5222d;
+}
+
+.deleteButton {
+  text-decoration: none;
+  background: unset;
+  border: 1px solid rgb(245, 34, 45);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 6px 10px;
+  color: rgb(245, 34, 45);
+  margin-left: 15px;
+  width: 120px;
+}
+
+.addButton {
+  text-decoration: none;
+  background: unset;
+  border: 1px solid rgb(24, 144, 255);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 22px;
+  padding: 6px 10px;
+  color: rgb(24, 144, 255);
+  width: 120px;
+  margin-left: 10px;
+}
+
+.tagInput {
+  padding-left: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  height: 40px;
+  color: #262626;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+
+  &::placeholder {
+    color: #bfbfbf;
+  }
+}

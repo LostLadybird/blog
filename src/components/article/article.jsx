@@ -1,30 +1,36 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Markdown from 'react-markdown';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { CiHeart } from 'react-icons/ci';
+import { FaHeart } from 'react-icons/fa';
+
+import { fetchLike, fetchDislike } from '../../store/articlesSlice';
 
 import styles from './article.module.scss';
 
 const Article = (props) => {
-  const { title, likes, tags, text, userName, createdAt, imgPath, slug } = props;
+  const { title, favoritesCount, favorited, tags, text, userName, createdAt, imgPath, slug } = props;
+
+  const token = localStorage.getItem('token');
+
+  const dispatch = useDispatch();
 
   const formattedDate = format(new Date(createdAt), 'MMMM d, yyyy');
 
-  const tagList = (tags) => {
-    if (!tags) {
-      return null;
-    } else if (tags.length === 1) {
-      return <li className={styles.tag}>{tags[0]}</li>;
-    } else {
-      tags.map((el, i) => {
-        <li className={styles.tag} key={i + el}>
-          {el}
-        </li>;
-      });
+  const articlePath = `articles/${slug}`;
+
+  const onLikeClick = async () => {
+    if (token) {
+      if (!favorited) {
+        dispatch(fetchLike(slug));
+      } else {
+        dispatch(fetchDislike(slug));
+      }
     }
   };
 
-  const articlePath = `articles/${slug}`;
   return (
     <li>
       <div className={styles.article}>
@@ -34,9 +40,18 @@ const Article = (props) => {
               <Link to={articlePath} className={styles.title}>
                 {title}
               </Link>
-              <button className={styles.like}>🤍 {likes}</button>
+              <button className={styles.like} onClick={onLikeClick}>
+                {favoritesCount > 0 && token ? <FaHeart color="red" /> : <CiHeart />}
+                {favoritesCount}
+              </button>
             </div>
-            <ul className={styles.tags}>{tagList(tags)}</ul>
+            <ul className={styles.tags}>
+              {tags?.map((el, idx) => (
+                <li className={styles.tag} key={idx + el}>
+                  {el}
+                </li>
+              ))}
+            </ul>
             <span className={styles.text}>
               <Markdown>{text}</Markdown>
             </span>

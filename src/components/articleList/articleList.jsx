@@ -5,13 +5,14 @@ import Article from '../article/article';
 import './articleList.css';
 
 const ArticleList = ({ articles }) => {
-  const elements = articles.map((item) => {
+  const elements = articles?.map((item, i) => {
     return (
       <Article
-        key={item.slug}
+        key={item.createdAt + i}
         slug={item.slug}
         title={item.title}
-        likes={item.favoritesCount}
+        favoritesCount={item.favoritesCount}
+        favorited={item.favorited}
         tags={item.tagList}
         text={item.body}
         userName={item.author.username}

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-// import { getUser } from '../../service/API';
-// import { updateUser } from '../../service/API';
-import { editUser, fetchUpdatedUser } from '../../store/userSlice'; //
+import { editUser, fetchUpdatedUser } from '../../store/userSlice';
 
 import styles from './editProfileForm.module.scss';
 
@@ -15,7 +13,7 @@ const EditProfileForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm(); // defaultValues добавить
+  } = useForm();
 
   const serverError = useSelector((state) => state.user.error);
   const user = JSON.parse(localStorage.getItem('user'));
@@ -32,10 +30,8 @@ const EditProfileForm = () => {
         password: data.password,
       },
     };
-    // const token = localStorage.getItem('token');
     try {
       dispatch(fetchUpdatedUser(userData)).then((res) => {
-        console.log('res', res);
         if (!res.payload) {
           setAlert(true);
         } else {
@@ -43,18 +39,16 @@ const EditProfileForm = () => {
           navigate('/');
         }
       });
-      // const response = await updateUser(userData, token);
-      // console.log('response in form', response);
-      // if (!response) {
-      //   setAlert(true);
-      // } else {
-      //   dispatch(editUser(response));
-      //   navigate('/');
-      // }
     } catch (error) {
       throw new Error(error.message);
     }
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/');
+    }
+  }, []);
   return (
     <div className={styles.editWrapper}>
       <form className={styles.editForm} onSubmit={handleSubmit(onSubmitFn)}>
@@ -85,10 +79,10 @@ const EditProfileForm = () => {
             ></input>
             {serverError?.username && (
               <p className={styles.error}>
-                {user.username} {serverError?.username}
+                {user?.username} {serverError?.username}
               </p>
             )}
-            {errors.username && <p className={styles.error}>{errors.username.message}</p>}
+            {errors?.username && <p className={styles.error}>{errors.username.message}</p>}
           </li>
           <li className={styles.inputItem}>
             <label className={styles.label} htmlFor="email">
@@ -154,7 +148,7 @@ const EditProfileForm = () => {
               type="text"
               id="avatar"
               placeholder="Avatar image"
-              defaultValue={user.avatar}
+              defaultValue={user?.avatar}
               style={errors.avatar && { outline: '1px solid #F5222D' }}
               {...register('avatar', {
                 pattern: {

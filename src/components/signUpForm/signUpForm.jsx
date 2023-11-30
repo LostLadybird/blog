@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { registerUser } from '../../service/API';
-// import { setUser } from '../../store/userSlice';
-import { setUser } from '../../store/userSlice';
+import { setUser, fetchRegisterUser } from '../../store/userSlice';
 
 import styles from './signUpForm.module.scss';
 
 const SignUpForm = () => {
+  const [alert, setAlert] = useState(false);
   const serverError = useSelector((state) => state.user.error);
   const { isAuth } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.user);
@@ -33,8 +32,13 @@ const SignUpForm = () => {
       },
     };
     try {
-      const res = await registerUser(userData);
-      dispatch(setUser(res));
+      dispatch(fetchRegisterUser(userData)).then((res) => {
+        if (!res.payload) {
+          setAlert(true);
+        } else {
+          dispatch(setUser(res.payload));
+        }
+      });
     } catch (error) {
       throw new Error(error.message);
     }
@@ -166,6 +170,7 @@ const SignUpForm = () => {
           </label>
         </div>
         {errors.agreement && <p className={styles.error}>{errors.agreement.message}</p>}
+        {alert && <p className={styles.error}>Username or Email is already taken!</p>}
         <button className={styles.submitButton} type="submit">
           Create
         </button>

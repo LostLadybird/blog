@@ -30,7 +30,6 @@ const SignInForm = () => {
     };
     try {
       dispatch(fetchUser(userData)).then((res) => {
-        console.log('sign in', res);
         if (!res.payload) {
           setAlert(true);
         } else {

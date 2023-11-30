@@ -3,14 +3,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'antd';
 
 import ArticleList from '../../components/articleList';
-import { fetchArticles, changePage } from '../../store/articlesSlice';
+import { fetchArticles, changePage } from '../../store/articlesSlice'; //
 import { allArticlesCount } from '../../service/API';
+import { login } from '../../store/userSlice';
 
 import './homePage.css';
 
 const HomePage = () => {
   const articles = useSelector((state) => state.articles.articles);
+  const { isAuth } = useSelector((state) => state.user);
   const page = useSelector((state) => state.articles.page);
+
+  const token = localStorage.getItem('token');
 
   const [articlesCount, setArticlesCount] = useState(1);
 
@@ -22,12 +26,14 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    if (token) {
+      dispatch(login());
+    }
     fetchCountData();
     dispatch(fetchArticles((page - 1) * 5));
-  }, [dispatch, page]);
+  }, [dispatch, page, isAuth]);
 
   const onChangePagination = (page) => {
-    // console.log('pagination', page);
     dispatch(changePage(page));
   };
 

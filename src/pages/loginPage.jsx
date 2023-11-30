@@ -1,8 +1,6 @@
 import React from 'react';
 
-import SignInForm from '../../components/signInForm/signInForm';
-
-import './loginPage.css';
+import SignInForm from '../components/signInForm/signInForm';
 
 const LoginPage = () => {
   return <SignInForm />;

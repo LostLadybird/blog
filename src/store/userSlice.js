@@ -1,13 +1,22 @@
 /* eslint-disable indent */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { registerUser, loginUser, updateUser } from '../service/API'; //, updateUser
+import { registerUser, loginUser, updateUser } from '../service/API';
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async (userData) => {
   try {
     const response = await loginUser(userData);
-    console.log('fetch user', response);
     if (response.status === 422) throw new Error('Wrong email or password');
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
+export const fetchRegisterUser = createAsyncThunk('user/fetchRegisterUser', async (userData) => {
+  try {
+    const response = await registerUser(userData);
+    if (response.status === 422) throw new Error('Username or email is already taken');
     return response;
   } catch (error) {
     throw new Error(error);
@@ -17,9 +26,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (userData) => 
 export const fetchUpdatedUser = createAsyncThunk('user/fetchUpdatedUser', async (userData) => {
   try {
     const token = localStorage.getItem('token');
-    // console.log('TOKEN in slice', token, 'userData in slice:', userData);
     const response = await updateUser(userData, token);
-    console.log('fetch updated user', response);
     return response;
   } catch (error) {
     throw new Error(error);
@@ -37,38 +44,36 @@ const userSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
-      console.log('set user', action.payload);
       localStorage.setItem('user', JSON.stringify(action.payload));
       state.isAuth = true;
     },
     login(state) {
       state.isAuth = true;
-      console.log('login');
     },
     logOut(state) {
       state.user = null;
       state.isAuth = false;
     },
     editUser(state, action) {
-      // const { user } = action.payload;
-      // console.log('user in edit slice', user);
       state.user = action.payload;
-      // console.log('edit user action payload', action.payload);
       localStorage.setItem('user', JSON.stringify(action.payload));
       localStorage.setItem('token', action.payload.token);
       localStorage.setItem('image', action.payload.image);
     },
+    setError(state, action) {
+      state.error = action.payload;
+    },
   },
   extraReducers: {
-    [registerUser.pending]: (state) => {
+    [fetchRegisterUser.pending]: (state) => {
       state.status = 'loading';
       state.error = null;
     },
-    [registerUser.fulfilled]: (state, action) => {
+    [fetchRegisterUser.fulfilled]: (state, action) => {
       state.status = 'fulfilled';
       state.user = action.payload;
     },
-    [registerUser.rejected]: (state, action) => {
+    [fetchRegisterUser.rejected]: (state, action) => {
       state.status = 'error';
       state.error = action.payload;
     },
@@ -98,7 +103,6 @@ const userSlice = createSlice({
     },
   },
 });
-// export const IsAuthCheck = (state) => Boolean(state.user.user);
-export const { setUser, editUser, logOut, login } = userSlice.actions;
+export const { setUser, editUser, logOut, login, setError } = userSlice.actions;
 
 export default userSlice.reducer;
